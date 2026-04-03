@@ -388,20 +388,35 @@
     <!-- Main Layout Container -->
     <main class="max-w-[1280px] mx-auto px-6 md:px-12 pt-8 md:pt-10 pb-12 flex flex-col md:flex-row gap-16 lg:gap-32">
         
-        <!-- Sidebar - Table of Contents -->
-        <aside class="hidden md:block w-[220px] shrink-0">
+        <!-- Collapsible Sidebar - Table of Contents -->
+        <aside id="desktopSidebar" class="hidden md:block w-[220px] shrink-0 transition-[width] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] relative z-40">
             <div class="sticky top-[120px]">
-                <h4 class="font-plex text-[9px] tracking-[0.2em] text-[#888888] uppercase mb-10">Contents</h4>
-                <nav>
-                    <ul class="flex flex-col gap-6">
-                        <li><a href="#overview" class="flex gap-6 items-baseline group cursor-pointer sidebar-link" data-section="overview"><span class="font-plex text-[#A09D96] text-[9px] tracking-[0.1em] transition-colors sidebar-num">01</span><span class="text-[#888888] text-[15px] font-serif transition-all sidebar-text">Project Overview</span></a></li>
-                        <li><a href="#problem" class="flex gap-6 items-baseline group cursor-pointer sidebar-link" data-section="problem"><span class="font-plex text-[#A09D96] text-[9px] tracking-[0.1em] transition-colors sidebar-num">02</span><span class="text-[#888888] text-[15px] font-serif transition-all sidebar-text">Problem</span></a></li>
-                        <li><a href="#research" class="flex gap-6 items-baseline group cursor-pointer sidebar-link" data-section="research"><span class="font-plex text-[#A09D96] text-[9px] tracking-[0.1em] transition-colors sidebar-num">03</span><span class="text-[#888888] text-[15px] font-serif transition-all sidebar-text">Research and Insights</span></a></li>
-                        <li><a href="#strategy" class="flex gap-6 items-baseline group cursor-pointer sidebar-link" data-section="strategy"><span class="font-plex text-[#A09D96] text-[9px] tracking-[0.1em] transition-colors sidebar-num">04</span><span class="text-[#888888] text-[15px] font-serif transition-all sidebar-text">Design Strategy</span></a></li>
-                        <li><a href="#solution" class="flex gap-6 items-baseline group cursor-pointer sidebar-link" data-section="solution"><span class="font-plex text-[#A09D96] text-[9px] tracking-[0.1em] transition-colors sidebar-num">05</span><span class="text-[#888888] text-[15px] font-serif transition-all sidebar-text">Solution</span></a></li>
-                        <li><a href="#impact" class="flex gap-6 items-baseline group cursor-pointer sidebar-link" data-section="impact"><span class="font-plex text-[#A09D96] text-[9px] tracking-[0.1em] transition-colors sidebar-num">06</span><span class="text-[#888888] text-[15px] font-serif transition-all sidebar-text">Impact</span></a></li>
-                    </ul>
-                </nav>
+                
+                <!-- Expanded Content -->
+                <div id="desktopTocContent" class="transition-opacity duration-300 ease-in-out opacity-100 w-[220px]">
+                    <div class="flex items-center justify-between mb-10 pr-2">
+                        <h4 class="font-plex text-[9px] tracking-[0.2em] text-[#888888] uppercase">Contents</h4>
+                        <button id="minimizeTocBtn" type="button" class="text-[#888888] hover:text-[#111111] transition-colors p-1.5 -mr-1.5 rounded-md hover:bg-[#D8D4CC]/30" aria-label="Minimize sidebar">
+                            <i data-lucide="panel-left-close" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                    <nav>
+                        <ul class="flex flex-col gap-6">
+                            <li><a href="#overview" class="flex gap-6 items-baseline group cursor-pointer sidebar-link" data-section="overview"><span class="font-plex text-[#A09D96] text-[9px] tracking-[0.1em] transition-colors sidebar-num">01</span><span class="text-[#888888] text-[15px] font-serif transition-all sidebar-text">Project Overview</span></a></li>
+                            <li><a href="#problem" class="flex gap-6 items-baseline group cursor-pointer sidebar-link" data-section="problem"><span class="font-plex text-[#A09D96] text-[9px] tracking-[0.1em] transition-colors sidebar-num">02</span><span class="text-[#888888] text-[15px] font-serif transition-all sidebar-text">Problem</span></a></li>
+                            <li><a href="#research" class="flex gap-6 items-baseline group cursor-pointer sidebar-link" data-section="research"><span class="font-plex text-[#A09D96] text-[9px] tracking-[0.1em] transition-colors sidebar-num">03</span><span class="text-[#888888] text-[15px] font-serif transition-all sidebar-text">Research and Insights</span></a></li>
+                            <li><a href="#strategy" class="flex gap-6 items-baseline group cursor-pointer sidebar-link" data-section="strategy"><span class="font-plex text-[#A09D96] text-[9px] tracking-[0.1em] transition-colors sidebar-num">04</span><span class="text-[#888888] text-[15px] font-serif transition-all sidebar-text">Design Strategy</span></a></li>
+                            <li><a href="#solution" class="flex gap-6 items-baseline group cursor-pointer sidebar-link" data-section="solution"><span class="font-plex text-[#A09D96] text-[9px] tracking-[0.1em] transition-colors sidebar-num">05</span><span class="text-[#888888] text-[15px] font-serif transition-all sidebar-text">Solution</span></a></li>
+                            <li><a href="#impact" class="flex gap-6 items-baseline group cursor-pointer sidebar-link" data-section="impact"><span class="font-plex text-[#A09D96] text-[9px] tracking-[0.1em] transition-colors sidebar-num">06</span><span class="text-[#888888] text-[15px] font-serif transition-all sidebar-text">Impact</span></a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Collapsed Button -->
+                <button id="maximizeTocBtn" type="button" class="absolute top-0 left-0 bg-[#F8F9FA] border border-[#D8D4CC]/50 p-2.5 rounded-xl shadow-sm text-[#111111] hover:bg-[#EAE7E0] transition-all duration-300 opacity-0 pointer-events-none scale-90" aria-label="Expand sidebar">
+                    <i data-lucide="list" class="w-5 h-5"></i>
+                </button>
+
             </div>
         </aside>
 
@@ -1017,6 +1032,45 @@
                 if (isTocDown) {
                     e.preventDefault();
                 }
+            });
+        }
+
+        // --- 2.8 Desktop TOC Minimize/Maximize Logic ---
+        const desktopSidebar = document.getElementById('desktopSidebar');
+        const desktopTocContent = document.getElementById('desktopTocContent');
+        const minimizeTocBtn = document.getElementById('minimizeTocBtn');
+        const maximizeTocBtn = document.getElementById('maximizeTocBtn');
+
+        if (minimizeTocBtn && maximizeTocBtn) {
+            minimizeTocBtn.addEventListener('click', () => {
+                // 1. Fade out the TOC content
+                desktopTocContent.style.opacity = '0';
+                desktopTocContent.style.pointerEvents = 'none';
+                
+                // 2. Wait for fade, then shrink width and show maximize button
+                setTimeout(() => {
+                    desktopSidebar.classList.remove('w-[220px]');
+                    desktopSidebar.classList.add('w-[48px]');
+                    
+                    maximizeTocBtn.classList.remove('opacity-0', 'pointer-events-none', 'scale-90');
+                    maximizeTocBtn.classList.add('opacity-100', 'scale-100');
+                }, 150);
+            });
+
+            maximizeTocBtn.addEventListener('click', () => {
+                // 1. Hide maximize button
+                maximizeTocBtn.classList.remove('opacity-100', 'scale-100');
+                maximizeTocBtn.classList.add('opacity-0', 'pointer-events-none', 'scale-90');
+                
+                // 2. Expand sidebar width
+                desktopSidebar.classList.remove('w-[48px]');
+                desktopSidebar.classList.add('w-[220px]');
+                
+                // 3. Wait for expansion, then fade in TOC content
+                setTimeout(() => {
+                    desktopTocContent.style.opacity = '1';
+                    desktopTocContent.style.pointerEvents = 'auto';
+                }, 300);
             });
         }
 
