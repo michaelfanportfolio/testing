@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manulife Lead Generation Optimization - Michael Fan</title>
+    <title>Personal Loan Tactical Blog Redesign - Michael Fan</title>
     
     <!-- Font Imports -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,6 +37,7 @@
 
     <!-- Style Overrides -->
     <style>
+        /* Slider Overrides */
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
@@ -105,7 +106,7 @@
             opacity: 1;
         }
 
-        /* LIGHTBOX ENHANCEMENT: Drag-to-Pan implementation */
+        /* Lightbox / Zoom Drag-to-Pan Implementation */
         #lightboxScrollArea {
             overflow: hidden !important; 
             display: flex !important; 
@@ -113,9 +114,9 @@
             justify-content: center;
             height: 100%;
             width: 100%;
-            touch-action: none; /* Prevent browser swipe navigation when panning */
+            touch-action: none; 
         }
-
+        
         #lightboxImage {
             transition: transform 0.3s cubic-bezier(0.2, 0, 0.2, 1);
             cursor: zoom-in;
@@ -128,21 +129,13 @@
             user-select: none;
             -webkit-user-drag: none;
         }
+        
+        #lightboxImage.is-zoomed { cursor: grab; }
+        #lightboxImage.is-panning { transition: none !important; cursor: grabbing; }
 
-        #lightboxImage.is-zoomed {
-            cursor: grab;
-        }
-
-        #lightboxImage.is-panning {
-            transition: none !important; /* Disable transition during drag for zero-lag 1:1 movement */
-            cursor: grabbing;
-        }
-
-        /* Mobile Lightbox Target Overrides */
+        /* Mobile Lightbox Overrides */
         @media (max-width: 768px) {
-            #lightboxModal {
-                padding: 0 !important;
-            }
+            #lightboxModal { padding: 0 !important; }
             #lightboxContent {
                 width: 100% !important;
                 height: 100% !important;
@@ -150,9 +143,7 @@
                 max-height: 100% !important;
                 border-radius: 0 !important;
             }
-            #lightboxScrollArea {
-                padding: 0 !important;
-            }
+            #lightboxScrollArea { padding: 0 !important; }
         }
 
         /* Skeleton Shimmer Effect */
@@ -177,6 +168,18 @@
             );
             animation: shimmer 2s infinite;
             content: '';
+        }
+
+        /* Scroll Fading Effect */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -244,7 +247,7 @@
 
             <div class="hidden md:flex items-center gap-[40px]">
                 <nav class="flex items-center gap-[32px]">
-                    <button id="workToggle" type="button" class="font-plex text-[10px] tracking-[2px] text-[#666666] uppercase hover:text-[#111111] transition-colors flex items-center gap-1 group">
+                    <button id="workToggle" class="font-plex text-[10px] tracking-[2px] text-[#666666] uppercase hover:text-[#111111] transition-colors flex items-center gap-1 group">
                         Work
                         <i data-lucide="chevron-down" id="workChevron" class="w-3 h-3 transition-transform duration-300 group-hover:translate-y-0.5"></i>
                     </button>
@@ -257,7 +260,7 @@
 
             <!-- Mobile Hamburger Button -->
             <div class="md:hidden flex items-center">
-                <button id="mobileMenuOpenBtn" type="button" class="text-[#111111] hover:opacity-70 transition-opacity p-2 -mr-2" aria-label="Open Mobile Menu">
+                <button id="mobileMenuOpenBtn" class="text-[#111111] hover:opacity-70 transition-opacity p-2 -mr-2" aria-label="Open Mobile Menu">
                     <i data-lucide="menu" class="w-6 h-6"></i>
                 </button>
             </div>
@@ -271,7 +274,7 @@
                     <!-- Project 1 -->
                     <a href="https://michaelfanportfolio.github.io/project-personal-loan-tactical-blog-redesign/" class="group flex gap-5 items-start p-6 hover:bg-[#EAE7E0] rounded-2xl transition-colors">
                         <div class="w-20 h-20 md:w-24 md:h-24 shrink-0 rounded-xl bg-gray-200 flex items-center justify-center transition-transform group-hover:scale-[1.02] border border-transparent group-hover:border-[#D8D4CC] overflow-hidden">
-                            <img src="megamenu image-01-opt.webp" alt="Blog Redesign" class="w-full h-full object-cover mix-blend-multiply" onerror="this.style.display='none'">
+                            <img src="megamenu image-01.jpg" alt="Blog Redesign" class="w-full h-full object-cover mix-blend-multiply" onerror="this.style.display='none'">
                         </div>
                         <div class="flex flex-col pt-1">
                             <span class="font-plex text-[9px] text-[#A09D96] mb-1">01</span>
@@ -281,17 +284,17 @@
                     <!-- Project 2 -->
                     <a href="#" class="group flex gap-5 items-start p-6 hover:bg-[#EAE7E0] rounded-2xl transition-colors">
                         <div class="w-20 h-20 md:w-24 md:h-24 shrink-0 rounded-xl bg-gray-200 flex items-center justify-center transition-transform group-hover:scale-[1.02] border border-transparent group-hover:border-[#D8D4CC] overflow-hidden">
-                            <img src="megamenu image-02-opt.webp" alt="Manulife Lead Generation Optimization" class="w-full h-full object-cover mix-blend-multiply" onerror="this.style.display='none'">
+                            <img src="megamenu image-02.jpg" alt="Manulife" class="w-full h-full object-cover mix-blend-multiply" onerror="this.style.display='none'">
                         </div>
                         <div class="flex flex-col pt-1">
                             <span class="font-plex text-[9px] text-[#A09D96] mb-1">02</span>
-                            <h3 class="font-serif text-[16px] leading-tight group-hover:text-[#111111] text-[#666666] transition-colors">Manulife Lead Generation Optimization</h3>
+                            <h3 class="font-serif text-[16px] leading-tight group-hover:text-[#111111] text-[#666666] transition-colors">Manulife Lead Generation Funnel</h3>
                         </div>
                     </a>
                     <!-- Project 3 -->
                     <a href="#" class="group flex gap-5 items-start p-6 hover:bg-[#EAE7E0] rounded-2xl transition-colors">
                         <div class="w-20 h-20 md:w-24 md:h-24 shrink-0 rounded-xl bg-gray-200 flex items-center justify-center transition-transform group-hover:scale-[1.02] border border-transparent group-hover:border-[#D8D4CC] overflow-hidden">
-                            <img src="megamenu image-03-opt.webp" alt="MoneyHero" class="w-full h-full object-cover mix-blend-multiply" onerror="this.style.display='none'">
+                            <img src="megamenu image-03.jpg" alt="MoneyHero" class="w-full h-full object-cover mix-blend-multiply" onerror="this.style.display='none'">
                         </div>
                         <div class="flex flex-col pt-1">
                             <span class="font-plex text-[9px] text-[#A09D96] mb-1">03</span>
@@ -301,7 +304,7 @@
                     <!-- Project 4 -->
                     <a href="#" class="group flex gap-5 items-start p-6 hover:bg-[#EAE7E0] rounded-2xl transition-colors">
                         <div class="w-20 h-20 md:w-24 md:h-24 shrink-0 rounded-xl bg-gray-200 flex items-center justify-center transition-transform group-hover:scale-[1.02] border border-transparent group-hover:border-[#D8D4CC] overflow-hidden">
-                            <img src="megamenu image-04-opt.webp" alt="Campaign Page Optimization" class="w-full h-full object-cover mix-blend-multiply" onerror="this.style.display='none'">
+                            <img src="megamenu image-04.jpg" alt="Campaign Page Optimization" class="w-full h-full object-cover mix-blend-multiply" onerror="this.style.display='none'">
                         </div>
                         <div class="flex flex-col pt-1">
                             <span class="font-plex text-[9px] text-[#A09D96] mb-1">04</span>
@@ -311,7 +314,7 @@
                     <!-- Project 5 -->
                     <a href="#" class="group flex gap-5 items-start p-6 hover:bg-[#EAE7E0] rounded-2xl transition-colors">
                         <div class="w-20 h-20 md:w-24 md:h-24 shrink-0 rounded-xl bg-gray-200 flex items-center justify-center transition-transform group-hover:scale-[1.02] border border-transparent group-hover:border-[#D8D4CC] overflow-hidden">
-                            <img src="megamenu image-05-opt.webp" alt="Reward Redemption Flow Redesign" class="w-full h-full object-cover mix-blend-multiply" onerror="this.style.display='none'">
+                            <img src="megamenu image-05.jpg" alt="Reward Redemption Flow Redesign" class="w-full h-full object-cover mix-blend-multiply" onerror="this.style.display='none'">
                         </div>
                         <div class="flex flex-col pt-1">
                             <span class="font-plex text-[9px] text-[#A09D96] mb-1">05</span>
@@ -321,7 +324,7 @@
                     <!-- Project 6 -->
                     <a href="#" class="group flex gap-5 items-start p-6 hover:bg-[#EAE7E0] rounded-2xl transition-colors">
                         <div class="w-20 h-20 md:w-24 md:h-24 shrink-0 rounded-xl bg-gray-200 flex items-center justify-center transition-transform group-hover:scale-[1.02] border border-transparent group-hover:border-[#D8D4CC] overflow-hidden">
-                            <img src="megamenu image-06-opt.webp" alt="Virtual Bank Page Redesign" class="w-full h-full object-cover mix-blend-multiply" onerror="this.style.display='none'">
+                            <img src="megamenu image-06.jpg" alt="Virtual Bank Page Redesign" class="w-full h-full object-cover mix-blend-multiply" onerror="this.style.display='none'">
                         </div>
                         <div class="flex flex-col pt-1">
                             <span class="font-plex text-[9px] text-[#A09D96] mb-1">06</span>
@@ -331,7 +334,7 @@
                     <!-- Project 7 -->
                     <a href="#" class="group flex gap-5 items-start p-6 hover:bg-[#EAE7E0] rounded-2xl transition-colors">
                         <div class="w-20 h-20 md:w-24 md:h-24 shrink-0 rounded-xl bg-gray-200 flex items-center justify-center transition-transform group-hover:scale-[1.02] border border-transparent group-hover:border-[#D8D4CC] overflow-hidden">
-                            <img src="megamenu image-07-opt.webp" alt="Travel Insurance Funnel" class="w-full h-full object-cover mix-blend-multiply" onerror="this.style.display='none'">
+                            <img src="megamenu image-07.jpg" alt="Travel Insurance Funnel" class="w-full h-full object-cover mix-blend-multiply" onerror="this.style.display='none'">
                         </div>
                         <div class="flex flex-col pt-1">
                             <span class="font-plex text-[9px] text-[#A09D96] mb-1">07</span>
@@ -341,7 +344,7 @@
                     <!-- Project 8 -->
                     <a href="#" class="group flex gap-5 items-start p-6 hover:bg-[#EAE7E0] rounded-2xl transition-colors">
                         <div class="w-20 h-20 md:w-24 md:h-24 shrink-0 rounded-xl bg-gray-200 flex items-center justify-center transition-transform group-hover:scale-[1.02] border border-transparent group-hover:border-[#D8D4CC] overflow-hidden">
-                            <img src="megamenu image-08-opt.webp" alt="Tactical Comparison Page" class="w-full h-full object-cover mix-blend-multiply" onerror="this.style.display='none'">
+                            <img src="megamenu image-08.jpg" alt="Tactical Comparison Page" class="w-full h-full object-cover mix-blend-multiply" onerror="this.style.display='none'">
                         </div>
                         <div class="flex flex-col pt-1">
                             <span class="font-plex text-[9px] text-[#A09D96] mb-1">08</span>
@@ -351,7 +354,7 @@
                     <!-- Project 9 -->
                     <a href="#" class="group flex gap-5 items-start p-6 hover:bg-[#EAE7E0] rounded-2xl transition-colors">
                         <div class="w-20 h-20 md:w-24 md:h-24 shrink-0 rounded-xl bg-gray-200 flex items-center justify-center transition-transform group-hover:scale-[1.02] border border-transparent group-hover:border-[#D8D4CC] overflow-hidden">
-                            <img src="megamenu image-09-opt.webp" alt="Car Insurance Checkout Flow" class="w-full h-full object-cover mix-blend-multiply" onerror="this.style.display='none'">
+                            <img src="megamenu image-09.jpg" alt="Car Insurance Checkout Flow" class="w-full h-full object-cover mix-blend-multiply" onerror="this.style.display='none'">
                         </div>
                         <div class="flex flex-col pt-1">
                             <span class="font-plex text-[9px] text-[#A09D96] mb-1">09</span>
@@ -362,7 +365,7 @@
                 
                 <!-- Mega Menu Close Button -->
                 <div class="flex justify-center mt-8 pt-8 border-t border-[#D8D4CC]/50">
-                    <button id="closeWorkMenuBtn" type="button" class="flex items-center gap-2 font-plex text-[10px] tracking-[2px] text-[#666666] uppercase hover:text-[#111111] transition-colors group">
+                    <button id="closeWorkMenuBtn" class="flex items-center gap-2 font-plex text-[10px] tracking-[2px] text-[#666666] uppercase hover:text-[#111111] transition-colors group">
                         Close Menu
                         <i data-lucide="chevron-up" class="w-4 h-4 transition-transform duration-300 group-hover:-translate-y-1"></i>
                     </button>
@@ -372,13 +375,13 @@
     </header>
 
     <!-- Breadcrumbs -->
-    <div class="max-w-[1280px] mx-auto px-6 md:px-12 pt-6 md:pt-8 w-full relative z-[50]">
+    <div class="max-w-[1280px] mx-auto px-6 md:px-12 pt-6 md:pt-8 w-full relative z-[50] fade-in-section">
         <nav class="flex items-center gap-3 font-plex text-[9px] tracking-[0.2em] text-[#888888] uppercase w-full overflow-x-auto hide-scrollbar whitespace-nowrap">
             <a href="#" class="hover:text-[#111111] transition-colors shrink-0">Home</a>
             <span class="text-[#D8D4CC] shrink-0">/</span>
             <a href="#" class="hover:text-[#111111] transition-colors shrink-0">Work</a>
             <span class="text-[#D8D4CC] shrink-0">/</span>
-            <span class="text-[#111111] shrink-0">Manulife Lead Generation Optimization</span>
+            <span class="text-[#111111] shrink-0">Personal Loan Tactical Blog Redesign</span>
         </nav>
     </div>
 
@@ -406,19 +409,19 @@
         <article class="flex-1 max-w-[880px] min-w-0">
             
             <!-- Hero Section -->
-            <div class="mb-12 md:mb-24">
+            <div class="mb-12 md:mb-24 fade-in-section">
                 <div class="font-plex text-[9px] tracking-[0.2em] text-[#888888] uppercase mb-8">Case Study</div>
                 <h1 class="font-instrument text-[48px] md:text-[64px] leading-[1.05] text-[#111111] mb-12">
-                    Manulife Lead Generation Optimization
+                    Personal Loan Tactical Blog Redesign
                 </h1>
 
                 <div class="w-full bg-[#E8E6DF] rounded-[24px] overflow-hidden flex items-center justify-center shadow-sm min-h-[300px]">
-                    <img src="image_page_cover-opt.webp" alt="Personal Loan Case Study Banner" class="w-full h-auto object-cover" onerror="this.style.display='none'">
+                    <img src="Personal Loan Case Study_Banner Cover.jpg" alt="Personal Loan Case Study Banner" class="w-full h-auto object-cover" onerror="this.style.display='none'">
                 </div>
             </div>
 
             <!-- 行動版懸浮目錄 (Mobile Sticky Table of Contents) -->
-            <div id="mobileToc" class="md:hidden sticky top-[76px] z-[90] bg-[#EFECE5]/95 backdrop-blur-sm border-y border-[#D8D4CC]/50 -mx-6 mb-12 w-[calc(100%+48px)] overflow-x-auto hide-scrollbar shadow-sm">
+            <div id="mobileToc" class="md:hidden sticky top-[76px] z-[90] bg-[#EFECE5]/95 backdrop-blur-sm border-y border-[#D8D4CC]/50 -mx-6 mb-12 w-[calc(100%+48px)] overflow-x-auto hide-scrollbar shadow-sm fade-in-section">
                 <nav>
                     <ul class="flex items-center gap-4 w-max px-6 after:content-[''] after:block after:w-2">
                         <li><a href="#overview" class="mobile-toc-link block py-4 px-2 text-[15px] font-serif text-[#888888] transition-colors relative" data-section="overview">Overview</a></li>
@@ -432,7 +435,7 @@
             </div>
 
             <!-- 01 Project Overview -->
-            <section id="overview" class="mb-32 section-target">
+            <section id="overview" class="mb-32 section-target fade-in-section">
                 <h2 class="font-instrument text-[36px] md:text-[44px] text-[#111111] flex items-center gap-6 mb-12">
                     <span class="font-plex text-[#A09D96] text-[12px] tracking-[0.1em] uppercase font-bold relative -top-1">01</span>
                     Project Overview
@@ -440,47 +443,47 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-12 gap-x-12 border-t border-[#D8D4CC] pt-12">
                     <div>
                         <div class="font-plex text-[9px] tracking-[0.2em] text-[#888888] uppercase mb-4">Project Type</div>
-                        <div class="font-serif text-[#111111] text-[16px] leading-relaxed">Application Funnel Optimization</div>
+                        <div class="font-serif text-[#111111] text-[16px] leading-relaxed">Content UX & Conversion Optimization</div>
                     </div>
                     <div>
                         <div class="font-plex text-[9px] tracking-[0.2em] text-[#888888] uppercase mb-4">Region</div>
-                        <div class="font-serif text-[#111111] text-[16px] leading-relaxed">SingSaver (MoneyHero Group)</div>
+                        <div class="font-serif text-[#111111] text-[16px] leading-relaxed">MoneyHero</div>
                     </div>
                     <div>
                         <div class="font-plex text-[9px] tracking-[0.2em] text-[#888888] uppercase mb-4">Team</div>
-                        <div class="font-serif text-[#111111] text-[16px] leading-relaxed">Product Managers, Marketing</div>
+                        <div class="font-serif text-[#111111] text-[16px] leading-relaxed">Product Managers, SEO Specialists, Content Writers</div>
                     </div>
                     <div>
                         <div class="font-plex text-[9px] tracking-[0.2em] text-[#888888] uppercase mb-4">Timeline</div>
-                        <div class="font-serif text-[#111111] text-[16px] leading-relaxed">May-June 2024</div>
+                        <div class="font-serif text-[#111111] text-[16px] leading-relaxed">June – July 2024</div>
                     </div>
                 </div>
             </section>
 
             <!-- 02 Problem -->
-            <section id="problem" class="mb-32 section-target">
+            <section id="problem" class="mb-32 section-target fade-in-section">
                 <h2 class="font-instrument text-[36px] md:text-[44px] text-[#111111] flex items-center gap-6 mb-12">
                     <span class="font-plex text-[#A09D96] text-[12px] tracking-[0.1em] uppercase font-bold relative -top-1">02</span>
                     Problem
                 </h2>
                 
                 <!-- Extracted Iframe Card (Mobile Only) -->
-                <div class="md:hidden w-full h-[600px] bg-[#EDF1F5] rounded-[32px] border border-[#D8D4CC]/30 flex items-center justify-center relative z-10 overflow-hidden mb-12">
-                    <iframe style="border: none; border-radius: 20px; width: 100%; height: 100%;" src="https://embed.figma.com/proto/osMRlGQXy4rmhL0ji6DPWi/P3-%7C-Portfolio-%7C-2024-SG-Manulife-Lead-Gen?page-id=581%3A14162&node-id=581-14412&viewport=526%2C43%2C0.38&scaling=scale-down&content-scaling=fixed&embed-host=share" allowfullscreen></iframe>
+                <div class="md:hidden w-full h-[600px] bg-[#EDF1F5] rounded-[32px] border border-[#D8D4CC]/30 flex items-center justify-center p-4 relative z-10 overflow-hidden mb-12">
+                    <iframe style="border: none; border-radius: 20px; width: 100%; height: 100%;" src="https://embed.figma.com/proto/YXG0FRGvgeTmndmJinBzgJ/P1-%7C-Portfolio-%7C-2024-MHG-Blog-PL-Instant?page-id=258%3A16136&node-id=258-17532&viewport=299%2C276%2C0.66&scaling=scale-down&content-scaling=fixed&embed-host=share" allowfullscreen></iframe>
                 </div>
 
-                <div class="mb-16 -mx-6 md:ml-0 md:-mr-12 lg:-mr-32 overflow-visible relative group" id="problemSlider">
-                    <div class="flex items-center gap-4 md:gap-8 overflow-x-auto hide-scrollbar pb-4 relative w-full snap-x snap-mandatory" id="problemTrack">
+                <div class="mb-16 -mx-6 md:ml-0 md:-mr-12 lg:-mr-32 overflow-visible relative group" id="problemSliderWrapper">
+                    <div class="flex items-center gap-4 md:gap-8 overflow-x-auto hide-scrollbar pb-4 relative w-full snap-x snap-mandatory" id="problemSliderTrack">
                         <!-- Spacer -->
-                        <div class="shrink-0 w-2 md:w-[10vw]"></div>
-                        <!-- Slides Generated by JS mapped components -->
+                        <div class="shrink-0 w-2 md:w-[10vw] hidden md:block"></div>
+                        <!-- Slides Generated by JS -->
                     </div>
                     
-                    <div class="flex items-center justify-center gap-5 mt-10">
-                        <div class="bg-white rounded-full px-7 h-12 flex items-center justify-center gap-4 shadow-sm border border-[#D8D4CC]/50" id="problemDots"></div>
-                        <button type="button" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#111111]/60 shadow-sm border border-[#D8D4CC]/50 hover:text-[#111111] transition-colors" id="problemPauseBtn">
-                            <svg id="pauseIcon" class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                            <svg id="playIcon" class="w-4 h-4 fill-current hidden" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <div class="hidden md:flex items-center justify-center gap-5 mt-10">
+                        <div class="bg-white rounded-full px-7 h-12 flex items-center justify-center gap-4 shadow-sm border border-[#D8D4CC]/50" id="problemSliderDots"></div>
+                        <button type="button" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#111111]/60 shadow-sm border border-[#D8D4CC]/50 hover:text-[#111111] transition-colors" id="problemSliderPauseBtn">
+                            <svg id="problemPauseIcon" class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                            <svg id="problemPlayIcon" class="w-4 h-4 fill-current hidden" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         </button>
                     </div>
                 </div>
@@ -488,145 +491,164 @@
                 <div class="max-w-[754px]">
                     <h3 class="text-[29.333px] font-normal text-[#000000] mb-6 font-instrument leading-[44px]">Problem</h3>
                     <div class="flex flex-col gap-6 text-[#444444] text-[16px] leading-[1.6]">
-                        <p>The business goal was to increase the volume of qualified insurance leads to feed the sales pipeline. However, users were abandoning the digital application funnel at an alarmingly high rate. </p>
-                        <p>The multi-step financial questionnaire felt overly intrusive, caused severe cognitive overload, and lacked clear progress visibility on mobile devices, resulting in high friction during the critical onboarding process.</p>
+                        <p>The Personal Loan Tactical Blog suffered from a severely low 3% "Apply" conversion rate and high page bounce rates, directly impacting affiliate revenue targets.</p>
+                        <p>The page layout was cluttered with overlapping content and lacked a clear information hierarchy, making it difficult for different user types to navigate the page effectively.</p>
+                        <p>Active buyers struggled to locate buried call-to-action (CTA) buttons, preventing them from quickly applying for financial products. At the same time, users seeking financial education felt overwhelmed by dense, unnavigable text, increasing the likelihood that they would leave the page early.</p>
+                        <p>The business therefore required a scalable solution that could increase affiliate applications while strictly adhering to SEO structures, ensuring the blog continued to maintain its organic search dominance.</p>
                     </div>
                 </div>
             </section>
 
             <!-- 03 Research and Insights -->
-            <section id="research" class="mb-32 section-target">
+            <section id="research" class="mb-32 section-target fade-in-section">
                 <h2 class="font-instrument text-[36px] md:text-[44px] text-[#111111] flex items-center gap-6 mb-12">
                     <span class="font-plex text-[#A09D96] text-[12px] tracking-[0.1em] uppercase font-bold relative -top-1">03</span>
                     Research and Insights
                 </h2>
 
-                <div class="max-w-[754px] flex flex-col gap-12">
-                    <div class="flex flex-col items-start gap-4 w-full">
-                        <div class="w-full bg-[#F8F9FA] rounded-[24px] overflow-hidden shadow-sm border border-[#D8D4CC]/0 h-[280px] md:h-[480px] relative flex items-center justify-center mb-2">
-                            <img src="image_research-and-insights_1-opt.webp" alt="Intent-Based Routing" class="w-full h-full object-cover mix-blend-multiply cursor-zoom-in p-0" onerror="this.style.display='none'" onclick="event.stopPropagation(); openLightbox('image_research-and-insights_1-opt.webp')">
-                            <button type="button" class="js-zoom-btn absolute bottom-6 right-6 md:bottom-8 md:right-8 hover:scale-105 transition-transform z-10 rounded-full shadow-lg" data-src="image_research-and-insights_1-opt.webp">
-                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect width="40" height="40" rx="20" fill="#1F2937"/>
-                                    <mask id="mask0_intent" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="8" y="8" width="24" height="24">
-                                        <rect x="8" y="8" width="24" height="24" fill="#D9D9D9"/>
-                                    </mask>
-                                    <g mask="url(#mask0_intent)">
-                                        <path d="M13 27V21H15V25H19V27H13ZM25 19V15H21V13H27V19H25Z" fill="#F8F9FA"/>
+                <div class="mb-20 -mx-6 md:ml-0 md:-mr-12 lg:-mr-32 overflow-visible relative">
+                    <div class="flex items-stretch overflow-x-auto snap-x snap-mandatory gap-4 md:gap-8 pb-4 hide-scrollbar w-full" id="resTrack">
+                        <!-- Mobile Start Spacer -->
+                        <div class="shrink-0 w-2 md:hidden"></div>
+                        
+                        <!-- Card 1 -->
+                        <div class="w-[85vw] max-w-md md:max-w-none md:w-[754px] h-[278px] md:h-[680px] shrink-0 snap-start bg-white rounded-[32px] p-8 md:p-10 border border-[#D8D4CC]/30 flex flex-col gap-6 relative group overflow-hidden">
+                            <h4 class="text-[20px] md:text-[22px] font-bold text-[#111111] font-sans text-center leading-tight">User Journey Map: Savvy Shopper User</h4>
+                            <div class="w-full flex-1 min-h-0 bg-[#F9F9F9] rounded-xl border border-[#F0F0F0] overflow-hidden relative">
+                                <img src="slide_1 Jetso Hunter – Individuals Seeking to Compare and Apply for Personal Loans 1.jpg" alt="Jetso Hunter User Journey" class="w-full h-full object-contain mix-blend-multiply" onerror="this.style.display='none'">
+                            </div>
+                            <button type="button" class="js-zoom-btn absolute bottom-6 right-6 md:bottom-8 md:right-8 w-10 h-10 lg:w-12 lg:h-12 hover:scale-105 transition-transform z-10 rounded-full shadow-lg" data-src="slide_1 Jetso Hunter – Individuals Seeking to Compare and Apply for Personal Loans 1.jpg">
+                                <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full pointer-events-none">
+                                    <rect width="400" height="400" rx="200" fill="#1F2937"/>
+                                    <mask id="mask_res_1" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="80" y="80" width="240" height="240"><rect x="80" y="80" width="240" height="240" fill="#D9D9D9"/></mask>
+                                    <g mask="url(#mask_res_1)">
+                                        <path d="M130 270V210H150V250H190V270H130ZM250 190V150H210V130H270V190H250Z" fill="#F8F9FA"/>
                                     </g>
                                 </svg>
                             </button>
                         </div>
-                        <h3 class="text-[29.333px] font-normal text-[#000000] font-instrument leading-[44px]">Funnel Analysis:</h3>
-                        <p class="text-[#444444] text-[16px] leading-[1.6]">The steepest drop-off occurred precisely when users were asked to input sensitive financial data without understanding the context or the "why" behind the request.</p>
+
+                        <!-- Card 2 -->
+                        <div class="w-[85vw] max-w-md md:max-w-none md:w-[754px] h-[278px] md:h-[680px] shrink-0 snap-start bg-white rounded-[32px] p-8 md:p-10 border border-[#D8D4CC]/30 flex flex-col gap-6 relative group overflow-hidden">
+                            <h4 class="text-[20px] md:text-[22px] font-bold text-[#111111] font-sans text-center leading-tight">User Journey Map: Educational Advice seeker</h4>
+                            <div class="w-full flex-1 min-h-0 bg-[#F9F9F9] rounded-xl border border-[#F0F0F0] overflow-hidden relative">
+                                <img src="slide_2 Individuals Searching for Educational Financial Advice 1.jpg" alt="Educational Advice User Journey" class="w-full h-full object-contain mix-blend-multiply" onerror="this.style.display='none'">
+                            </div>
+                            <button type="button" class="js-zoom-btn absolute bottom-6 right-6 md:bottom-8 md:right-8 w-10 h-10 lg:w-12 lg:h-12 hover:scale-105 transition-transform z-10 rounded-full shadow-lg" data-src="slide_2 Individuals Searching for Educational Financial Advice 1.jpg">
+                                <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full pointer-events-none">
+                                    <rect width="400" height="400" rx="200" fill="#1F2937"/>
+                                    <mask id="mask_res_2" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="80" y="80" width="240" height="240"><rect x="80" y="80" width="240" height="240" fill="#D9D9D9"/></mask>
+                                    <g mask="url(#mask_res_2)">
+                                        <path d="M130 270V210H150V250H190V270H130ZM250 190V150H210V130H270V190H250Z" fill="#F8F9FA"/>
+                                    </g>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <!-- Spacer -->
+                        <div class="shrink-0 w-6 md:w-12 lg:w-32"></div>
+                    </div>
+                    
+                    <div class="flex items-center justify-end gap-4 mt-8 pr-6 md:pr-12 lg:pr-32">
+                        <button id="resPrev" type="button" class="w-12 h-12 rounded-full bg-white border border-[#D8D4CC]/50 flex items-center justify-center text-[#111111]/60 hover:text-[#111111] shadow-sm"><i data-lucide="chevron-left" class="w-6 h-6"></i></button>
+                        <button id="resNext" type="button" class="w-12 h-12 rounded-full bg-white border border-[#D8D4CC]/50 flex items-center justify-center text-[#111111]/60 hover:text-[#111111] shadow-sm"><i data-lucide="chevron-right" class="w-6 h-6"></i></button>
+                    </div>
+                </div>
+
+                <div class="max-w-[754px] flex flex-col gap-12">
+                    <div class="flex flex-col items-start gap-4">
+                        <h3 class="text-[29.333px] font-normal text-[#000000] font-instrument leading-[44px]">Analytics Review:</h3>
+                        <p class="text-[#444444] text-[16px] leading-[1.6]">Google Analytics showed massive user drop-offs immediately after the top hero banner, indicating a failure to capture initial user intent.</p>
                     </div>
                     <div class="flex flex-col items-start gap-4">
-                        <h3 class="text-[29.333px] font-normal text-[#000000] font-instrument leading-[44px]">Usability Heuristics:</h3>
-                        <p class="text-[#444444] text-[16px] leading-[1.6]">The lack of system status visibility (no progress indicators) left mobile users frustrated, unsure of how many steps remained, leading to premature exit.</p>
+                        <h3 class="text-[29.333px] font-normal text-[#000000] font-instrument leading-[44px]">User Personas:</h3>
+                        <p class="text-[#444444] text-[16px] leading-[1.6]">We identified a behavioral clash between two distinct groups: "Jetso Hunters" (active, high-intent loan applicants) and financial learners (low-intent researchers).</p>
                     </div>
                     <div class="flex flex-col items-start gap-4">
-                        <h3 class="text-[29.333px] font-normal text-[#000000] font-instrument leading-[44px]">Trust Deficit:</h3>
-                        <p class="text-[#444444] text-[16px] leading-[1.6]">Users hesitated to provide personal data due to a lack of reassuring microcopy, fearing spam or data misuse.</p>
+                        <h3 class="text-[29.333px] font-normal text-[#000000] font-instrument leading-[44px]">Navigation Friction:</h3>
+                        <p class="text-[#444444] text-[16px] leading-[1.6]">The lack of internal jump links trapped users, preventing them from seamlessly transitioning between reading educational content and entering the application flow.</p>
                     </div>
                 </div>
             </section>
 
             <!-- 04 Design Strategy -->
-            <section id="strategy" class="mb-32 section-target">
+            <section id="strategy" class="mb-32 section-target fade-in-section">
                 <h2 class="font-instrument text-[36px] md:text-[44px] text-[#111111] flex items-center gap-6 mb-12">
                     <span class="font-plex text-[#A09D96] text-[12px] tracking-[0.1em] uppercase font-bold relative -top-1">04</span>
                     Design Strategy
                 </h2>
                 
-                <!-- Strategy Slider -->
-                <div class="mb-16 -mx-6 md:ml-0 md:-mr-12 lg:-mr-32 overflow-visible relative group" id="strategySlider">
-                    <div class="flex items-center gap-4 md:gap-8 overflow-x-auto hide-scrollbar pb-4 relative w-full snap-x snap-mandatory" id="strategyTrack">
-                        <!-- Spacer -->
-                        <div class="shrink-0 w-2 md:w-[10vw]"></div>
-                        <!-- Slides Generated by JS mapped components -->
-                    </div>
-                    
-                    <div class="flex items-center justify-center gap-5 mt-10">
-                        <div class="bg-white rounded-full px-7 h-12 flex items-center justify-center gap-4 shadow-sm border border-[#D8D4CC]/50" id="strategyDots"></div>
-                        <button type="button" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#111111]/60 shadow-sm border border-[#D8D4CC]/50 hover:text-[#111111] transition-colors" id="strategyPauseBtn">
-                            <svg id="stratPauseIcon" class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                            <svg id="stratPlayIcon" class="w-4 h-4 fill-current hidden" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        </button>
-                    </div>
-                </div>
-
                 <div class="max-w-[880px] flex flex-col gap-12 md:gap-16">
                     <!-- Item 1 -->
                     <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-                        <div class="w-[280px] md:w-[360px] shrink-0 bg-[#F8F9FA] rounded-[24px] overflow-hidden shadow-sm border-0 aspect-square flex items-center justify-center p-0">
-                            <img src="image_Design-Strategy_list_03-opt.webp" alt="Bite-Sized Chunking" class="w-full h-full object-cover mix-blend-multiply" onerror="this.style.display='none'">
+                        <div class="w-[280px] md:w-[360px] shrink-0 bg-[#F8F9FA] rounded-[24px] overflow-hidden shadow-sm border border-[#D8D4CC]/30 aspect-square flex items-center justify-center p-4">
+                            <img src="image_Design Strategy_01.jpg" alt="Dual-Path UX" class="w-full h-full object-contain mix-blend-multiply" onerror="this.style.display='none'">
                         </div>
                         <div class="flex flex-col gap-4 text-center md:text-left">
-                            <h3 class="text-[20px] md:text-[24px] font-normal text-[#111111] font-instrument">Bite-Sized Chunking</h3>
-                            <p class="text-[#444444] text-[15px] md:text-[16px] leading-[1.6]">Break complex form fields into a manageable, single-column layout to reduce perceived effort.</p>
+                            <h3 class="text-[20px] md:text-[24px] font-normal text-[#111111] font-instrument">Dual-Path UX</h3>
+                            <p class="text-[#444444] text-[15px] md:text-[16px] leading-[1.6]">Separate user intents through distinct interaction models for readers versus buyers, ensuring neither persona feels alienated.</p>
                         </div>
                     </div>
 
                     <!-- Item 2 -->
                     <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-                        <div class="w-[280px] md:w-[360px] shrink-0 bg-[#F8F9FA] rounded-[24px] overflow-hidden shadow-sm border-0 aspect-square flex items-center justify-center p-0">
-                            <img src="image_Design-Strategy_list_02-opt.webp" alt="Momentum Building" class="w-full h-full object-cover mix-blend-multiply" onerror="this.style.display='none'">
+                        <div class="w-[280px] md:w-[360px] shrink-0 bg-[#F8F9FA] rounded-[24px] overflow-hidden shadow-sm border border-[#D8D4CC]/30 aspect-square flex items-center justify-center p-4">
+                            <img src="image_Design Strategy_02.jpg" alt="Mobile-First Scannability" class="w-full h-full object-contain mix-blend-multiply" onerror="this.style.display='none'">
                         </div>
                         <div class="flex flex-col gap-4 text-center md:text-left">
-                            <h3 class="text-[20px] md:text-[24px] font-normal text-[#111111] font-instrument">Momentum Building</h3>
-                            <p class="text-[#444444] text-[15px] md:text-[16px] leading-[1.6]">Provide persistent visual feedback to encourage users to finish the flow through the psychological principle of the "Endowed Progress Effect."</p>
+                            <h3 class="text-[20px] md:text-[24px] font-normal text-[#111111] font-instrument">Mobile-First Scannability</h3>
+                            <p class="text-[#444444] text-[15px] md:text-[16px] leading-[1.6]">Ensure long-form educational text is easily digestible on mobile screens to combat reading fatigue.</p>
                         </div>
                     </div>
 
                     <!-- Item 3 -->
                     <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-                        <div class="w-[280px] md:w-[360px] shrink-0 bg-[#F8F9FA] rounded-[24px] overflow-hidden shadow-sm border-0 aspect-square flex items-center justify-center p-0">
-                            <img src="image_Design-Strategy_list_01-opt.webp" alt="Transparency" class="w-full h-full object-cover mix-blend-multiply" onerror="this.style.display='none'">
+                        <div class="w-[280px] md:w-[360px] shrink-0 bg-[#F8F9FA] rounded-[24px] overflow-hidden shadow-sm border border-[#D8D4CC]/30 aspect-square flex items-center justify-center p-4">
+                            <img src="image_Design Strategy_03.jpg" alt="Technical Feasibility & Constraints" class="w-full h-full object-contain mix-blend-multiply" onerror="this.style.display='none'">
                         </div>
                         <div class="flex flex-col gap-4 text-center md:text-left">
-                            <h3 class="text-[20px] md:text-[24px] font-normal text-[#111111] font-instrument">Transparency</h3>
-                            <p class="text-[#444444] text-[15px] md:text-[16px] leading-[1.6]">Use progressive disclosure to explain why sensitive data is required, framing it as a benefit to the user rather than a data grab.</p>
+                            <h3 class="text-[20px] md:text-[24px] font-normal text-[#111111] font-instrument">Technical Feasibility & Constraints</h3>
+                            <p class="text-[#444444] text-[15px] md:text-[16px] leading-[1.6]">Execute all design decisions within HubSpot's strict HTML/CSS limitations to ensure frontend viability, proving an ability to design for real-world technical constraints.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- 05 Solution -->
-            <section id="solution" class="mb-32 section-target">
+            <section id="solution" class="mb-32 section-target fade-in-section">
                 <h2 class="font-instrument text-[36px] md:text-[44px] text-[#111111] flex items-center gap-6 mb-12">
                     <span class="font-plex text-[#A09D96] text-[12px] tracking-[0.1em] uppercase font-bold relative -top-1">05</span>
                     Solution
                 </h2>
                 
-                <div class="mb-16 md:-mr-12 lg:-mr-32 overflow-visible relative group" id="solutionSlider">
-                    <div class="flex flex-col md:flex-row md:items-center gap-8 overflow-y-visible md:overflow-x-auto hide-scrollbar pb-4 relative w-full md:snap-x md:snap-mandatory" id="solutionTrack">
+                <!-- Extracted Iframe Card (Mobile Only) -->
+                <div class="md:hidden w-full h-[600px] bg-[#EDF1F5] rounded-[32px] border border-[#D8D4CC]/30 flex items-center justify-center p-4 relative z-10 overflow-hidden mb-12">
+                    <iframe style="border: none; border-radius: 20px; width: 100%; height: 100%;" src="https://embed.figma.com/proto/YXG0FRGvgeTmndmJinBzgJ/P1-%7C-Portfolio-%7C-2024-MHG-Blog-PL-Instant?page-id=408%3A14862&node-id=408-14863&viewport=505%2C227%2C0.61&scaling=scale-down&content-scaling=fixed&embed-host=share" allowfullscreen></iframe>
+                </div>
+                
+                <div class="mb-16 -mx-6 md:ml-0 md:-mr-12 lg:-mr-32 overflow-visible relative group" id="solutionSliderWrapper">
+                    <div class="flex flex-col md:flex-row md:items-center gap-8 overflow-y-visible md:overflow-x-auto hide-scrollbar pb-4 relative w-full md:snap-x md:snap-mandatory" id="solutionSliderTrack">
                         <!-- Spacer -->
                         <div class="shrink-0 w-2 md:w-[10vw] hidden md:block"></div>
-                        <!-- Slides Generated by JS mapped components -->
+                        <!-- Slides Generated by JS -->
                     </div>
                     
                     <div class="hidden md:flex items-center justify-center gap-5 mt-10">
-                        <div class="bg-white rounded-full px-7 h-12 flex items-center justify-center gap-4 shadow-sm border border-[#D8D4CC]/50" id="solutionDots"></div>
-                        <button type="button" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#111111]/60 shadow-sm border border-[#D8D4CC]/50 hover:text-[#111111] transition-colors" id="solutionPauseBtn">
-                            <svg id="solPauseIcon" class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                            <svg id="solPlayIcon" class="w-4 h-4 fill-current hidden" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <div class="bg-white rounded-full px-7 h-12 flex items-center justify-center gap-4 shadow-sm border border-[#D8D4CC]/50" id="solutionSliderDots"></div>
+                        <button type="button" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#111111]/60 shadow-sm border border-[#D8D4CC]/50 hover:text-[#111111] transition-colors" id="solutionSliderPauseBtn">
+                            <svg id="solutionPauseIcon" class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                            <svg id="solutionPlayIcon" class="w-4 h-4 fill-current hidden" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         </button>
                     </div>
                 </div>
 
-                <!-- Text elements under the Solution slider -->
-                <div class="max-w-[754px] flex flex-col gap-6 mb-24 md:mb-32 mt-12" id="solutionTextContainer">
-                    <h3 class="text-[18px] md:text-[20px] font-sans text-[#111111]">High-Conversion CTA Strategy</h3>
-                    <p class="text-[#444444] text-[16px] leading-[1.6]">The redesign features prominent, strategically placed CTAs like “Sign Up to Win” and “Submit.” By eliminating visual noise around these touchpoints, we ensure a frictionless path to conversion.</p>
-                </div>
-
-                <div class="max-w-[754px] space-y-24 md:space-y-32">
+                <div class="max-w-[754px] space-y-16 mt-8">
                     <!-- Item 1 -->
-                    <div class="flex flex-col items-start gap-5">
-                        <div class="w-full bg-[#F8F9FA] rounded-[24px] overflow-hidden shadow-sm border border-[#D8D4CC]/30 h-[280px] md:h-[480px] relative flex items-center justify-center mb-4 md:mb-6">
-                            <img src="image_solution_slide_03-opt.webp" alt="Streamlined User Journey" class="w-full h-full object-cover mix-blend-multiply p-0" onerror="this.style.display='none'">
-                            <button type="button" class="js-zoom-btn absolute bottom-6 right-6 md:bottom-8 md:right-8 hover:scale-105 transition-transform z-10 rounded-full shadow-lg" data-src="image_solution_slide_03-opt.webp">
-                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div class="flex flex-col items-start gap-4">
+                        <div class="w-full bg-[#F8F9FA] rounded-[24px] overflow-hidden shadow-sm border border-[#D8D4CC]/30 h-[280px] md:h-[480px] relative flex items-center justify-center mb-2">
+                            <img src="image_Solution_1.jpg" alt="Intent-Based Routing" class="w-full h-full object-contain mix-blend-multiply p-4" onerror="this.style.display='none'">
+                            <button type="button" class="js-zoom-btn absolute bottom-6 right-6 md:bottom-8 md:right-8 hover:scale-105 transition-transform z-10 rounded-full shadow-lg" data-src="image_zoom_solution_1.jpg">
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="pointer-events-none">
                                     <rect width="40" height="40" rx="20" fill="#1F2937"/>
                                     <mask id="mask0_intent" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="8" y="8" width="24" height="24">
                                         <rect x="8" y="8" width="24" height="24" fill="#D9D9D9"/>
@@ -637,16 +659,16 @@
                                 </svg>
                             </button>
                         </div>
-                        <h3 class="text-[18px] md:text-[20px] font-sans text-[#111111]">Streamlined User Journey</h3>
-                        <p class="text-[#444444] text-[16px] leading-[1.6]">We’ve replaced complexity with clarity. A numbered, step-by-step flow simplifies campaign mechanics, reducing cognitive load and allowing users to grasp the process in seconds.</p>
+                        <h3 class="text-[18px] md:text-[20px] font-sans text-[#111111]">Intent-Based Routing:</h3>
+                        <p class="text-[#444444] text-[16px] leading-[1.6]">Two clear CTAs immediately separate users who want to learn from those ready to compare, streamlining their journey.</p>
                     </div>
 
                     <!-- Item 2 -->
-                    <div class="flex flex-col items-start gap-5">
-                        <div class="w-full bg-[#F8F9FA] rounded-[24px] overflow-hidden shadow-sm border border-[#D8D4CC]/30 h-[280px] md:h-[480px] relative flex items-center justify-center mb-4 md:mb-6">
-                            <img src="image_solution_slide_04-opt.webp" alt="Concise & Scannable Messaging" class="w-full h-full object-cover mix-blend-multiply p-0" onerror="this.style.display='none'">
-                            <button type="button" class="js-zoom-btn absolute bottom-6 right-6 md:bottom-8 md:right-8 hover:scale-105 transition-transform z-10 rounded-full shadow-lg" data-src="image_solution_slide_04-opt.webp">
-                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div class="flex flex-col items-start gap-4">
+                        <div class="w-full bg-[#F8F9FA] rounded-[24px] overflow-hidden shadow-sm border border-[#D8D4CC]/30 h-[280px] md:h-[480px] relative flex items-center justify-center mb-2">
+                            <img src="image_Solution_2.jpg" alt="Adaptive Navigation" class="w-full h-full object-contain mix-blend-multiply p-4" onerror="this.style.display='none'">
+                            <button type="button" class="js-zoom-btn absolute bottom-6 right-6 md:bottom-8 md:right-8 hover:scale-105 transition-transform z-10 rounded-full shadow-lg" data-src="image_zoom_solution_2.jpg">
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="pointer-events-none">
                                     <rect width="40" height="40" rx="20" fill="#1F2937"/>
                                     <mask id="mask0_adaptive" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="8" y="8" width="24" height="24">
                                         <rect x="8" y="8" width="24" height="24" fill="#D9D9D9"/>
@@ -657,16 +679,16 @@
                                 </svg>
                             </button>
                         </div>
-                        <h3 class="text-[18px] md:text-[20px] font-sans text-[#111111]">Concise & Scannable Messaging</h3>
-                        <p class="text-[#444444] text-[16px] leading-[1.6]">Content has been optimized for speed and transparency. By using structured, high-impact copy, we maintain user trust while ensuring the value proposition is immediately clear.</p>
+                        <h3 class="text-[18px] md:text-[20px] font-sans text-[#111111]">Adaptive Navigation:</h3>
+                        <p class="text-[#444444] text-[16px] leading-[1.6]">Due to HubSpot coding limitations that prevented a global sticky menu, a collapsible Table of Contents was strategically placed at the bottom of each section. This allows users to easily reach and expand the menu as they finish reading a block of content, letting them jump between sections without endless vertical scrolling.</p>
                     </div>
 
                     <!-- Item 3 -->
-                    <div class="flex flex-col items-start gap-5">
-                        <div class="w-full bg-[#F8F9FA] rounded-[24px] overflow-hidden shadow-sm border border-[#D8D4CC]/30 h-[280px] md:h-[480px] relative flex items-center justify-center mb-4 md:mb-6">
-                            <img src="image_solution_slide_05-opt.webp" alt="Mobile-First Excellence" class="w-full h-full object-cover mix-blend-multiply p-0" onerror="this.style.display='none'">
-                            <button type="button" class="js-zoom-btn absolute bottom-6 right-6 md:bottom-8 md:right-8 hover:scale-105 transition-transform z-10 rounded-full shadow-lg" data-src="image_solution_slide_05-opt.webp">
-                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div class="flex flex-col items-start gap-4">
+                        <div class="w-full bg-[#F8F9FA] rounded-[24px] overflow-hidden shadow-sm border border-[#D8D4CC]/30 h-[280px] md:h-[480px] relative flex items-center justify-center mb-2">
+                            <img src="image_Solution_3.jpg" alt="Progressive Disclosure" class="w-full h-full object-contain mix-blend-multiply p-4" onerror="this.style.display='none'">
+                            <button type="button" class="js-zoom-btn absolute bottom-6 right-6 md:bottom-8 md:right-8 hover:scale-105 transition-transform z-10 rounded-full shadow-lg" data-src="image_zoom_solution_3.jpg">
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="pointer-events-none">
                                     <rect width="40" height="40" rx="20" fill="#1F2937"/>
                                     <mask id="mask0_progressive" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="8" y="8" width="24" height="24">
                                         <rect x="8" y="8" width="24" height="24" fill="#D9D9D9"/>
@@ -677,43 +699,40 @@
                                 </svg>
                             </button>
                         </div>
-                        <h3 class="text-[18px] md:text-[20px] font-sans text-[#111111]">Mobile-First Excellence</h3>
-                        <p class="text-[#444444] text-[16px] leading-[1.6]">The interface is fully responsive, prioritizing touch-friendly navigation and optimized input fields. The form is built for seamless interaction, ensuring a premium experience across all devices.</p>
+                        <h3 class="text-[18px] md:text-[20px] font-sans text-[#111111]">Progressive Disclosure:</h3>
+                        <p class="text-[#444444] text-[16px] leading-[1.6]">Accordions are used to hide dense text, keeping the page clean and reducing cognitive load for mobile users.</p>
                     </div>
 
-                    <!-- Conclusion / Integrated Form Block -->
-                    <div class="flex flex-col items-start gap-5 pt-10 md:pt-16 border-t border-[#D8D4CC]/50 mt-12 md:mt-20 relative w-full">
-                        
-                        <!-- Integrated Form Slider -->
-                        <div class="mb-12 md:mb-16 -mx-6 md:ml-0 md:-mr-12 lg:-mr-32 overflow-visible relative group w-[calc(100%+48px)] md:w-full" id="integratedFormSlider">
-                            <div class="flex items-center gap-4 md:gap-8 overflow-x-auto hide-scrollbar pb-4 relative w-full snap-x snap-mandatory" id="integratedFormTrack">
-                                <!-- Spacer -->
-                                <div class="shrink-0 w-2 md:w-[10vw]"></div>
-                                <!-- Slides Generated by JS mapped components -->
-                            </div>
-                            
-                            <div class="flex items-center justify-center gap-5 mt-10">
-                                <div class="bg-white rounded-full px-7 h-12 flex items-center justify-center gap-4 shadow-sm border border-[#D8D4CC]/50" id="integratedFormDots"></div>
-                                <button type="button" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-[#111111]/60 shadow-sm border border-[#D8D4CC]/50 hover:text-[#111111] transition-colors" id="integratedFormPauseBtn">
-                                    <svg id="intFormPauseIcon" class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                                    <svg id="intFormPlayIcon" class="w-4 h-4 fill-current hidden" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                                </button>
-                            </div>
+                    <!-- Item 4 -->
+                    <div class="flex flex-col items-start gap-4">
+                        <div class="w-full bg-[#F8F9FA] rounded-[24px] overflow-hidden shadow-sm border border-[#D8D4CC]/30 h-[280px] md:h-[480px] relative flex items-center justify-center mb-2">
+                            <img src="image_Solution_4.jpg" alt="Simplified Comparison" class="w-full h-full object-contain mix-blend-multiply p-4" onerror="this.style.display='none'">
+                            <button type="button" class="js-zoom-btn absolute bottom-6 right-6 md:bottom-8 md:right-8 hover:scale-105 transition-transform z-10 rounded-full shadow-lg" data-src="image_zoom_solution_4.jpg">
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="pointer-events-none">
+                                    <rect width="40" height="40" rx="20" fill="#1F2937"/>
+                                    <mask id="mask0_comparison" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="8" y="8" width="24" height="24">
+                                        <rect x="8" y="8" width="24" height="24" fill="#D9D9D9"/>
+                                    </mask>
+                                    <g mask="url(#mask0_comparison)">
+                                        <path d="M13 27V21H15V25H19V27H13ZM25 19V15H21V13H27V19H25Z" fill="#F8F9FA"/>
+                                    </g>
+                                </svg>
+                            </button>
                         </div>
+                        <h3 class="text-[18px] md:text-[20px] font-sans text-[#111111]">Simplified Comparison:</h3>
+                        <p class="text-[#444444] text-[16px] leading-[1.6]">Complex desktop tables are replaced with highly scannable rows that highlight only the top three decision-making metrics alongside prominent "Apply Now" buttons.</p>
+                    </div>
 
-                        <h3 class="text-[18px] md:text-[20px] font-sans text-[#111111]">Integrated "Blog-Friendly" Application Form</h3>
-                        <p class="text-[#444444] text-[16px] leading-[1.6]">
-                            We’ve swapped bulky layouts for a compact banner card that preserves the blog’s readability. Key features include:<br><br>
-                            <strong class="font-medium text-[#111111]">Reduced Height:</strong> Minimizes scrolling fatigue.<br>
-                            <strong class="font-medium text-[#111111]">Urgency Drivers:</strong> An integrated countdown timer to boost FOMO.<br>
-                            <strong class="font-medium text-[#111111]">Frictionless Design:</strong> A step-by-step guide that keeps the campaign visible without interrupting the editorial experience.
-                        </p>
+                    <!-- Conclusion -->
+                    <div class="flex flex-col items-start gap-4 pt-6 border-t border-[#D8D4CC]/50">
+                        <h3 class="text-[18px] md:text-[20px] font-sans text-[#111111]">Overall Impact:</h3>
+                        <p class="text-[#444444] text-[16px] leading-[1.6]">This design successfully navigates technical constraints while minimizing friction and user fatigue, making it effortless to digest complex financial data and convert quickly on a small screen.</p>
                     </div>
                 </div>
             </section>
 
             <!-- 06 Impact -->
-            <section id="impact" class="mb-12 section-target">
+            <section id="impact" class="mb-12 section-target fade-in-section">
                 <h2 class="font-instrument text-[36px] md:text-[44px] text-[#111111] flex items-center gap-6 mb-12">
                     <span class="font-plex text-[#A09D96] text-[12px] tracking-[0.1em] uppercase font-bold relative -top-1">06</span>
                     Impact
@@ -721,11 +740,15 @@
                 <div class="max-w-[754px] space-y-10">
                     <div class="flex gap-6 group items-start">
                         <div class="shrink-0 mt-1"><i data-lucide="chevron-right" class="w-4 h-4 text-[#A09D96]"></i></div>
-                        <p class="text-[#444444] text-[16px] leading-[1.6] group-hover:text-[#111111] transition-colors">Dramatically reduced form abandonment on mobile devices, directly impacting the bottom line.</p>
+                        <p class="text-[#444444] text-[16px] leading-[1.6] group-hover:text-[#111111] transition-colors"><strong class="text-[#111111] font-normal">[End Result]</strong> Successfully improved CTA click-through visibility for active buyers, driving a measurable uplift in top-of-funnel leads.</p>
                     </div>
                     <div class="flex gap-6 group items-start">
                         <div class="shrink-0 mt-1"><i data-lucide="chevron-right" class="w-4 h-4 text-[#A09D96]"></i></div>
-                        <p class="text-[#444444] text-[16px] leading-[1.6] group-hover:text-[#111111] transition-colors">Increased the total volume of qualified leads, proving that simplifying complex financial data directly drives customer acquisition and business growth.</p>
+                        <p class="text-[#444444] text-[16px] leading-[1.6] group-hover:text-[#111111] transition-colors">Significantly reduced page bounce rates for educational users by improving content digestion.</p>
+                    </div>
+                    <div class="flex gap-6 group items-start">
+                        <div class="shrink-0 mt-1"><i data-lucide="chevron-right" class="w-4 h-4 text-[#A09D96]"></i></div>
+                        <p class="text-[#444444] text-[16px] leading-[1.6] group-hover:text-[#111111] transition-colors">Shipped the fully optimized page within HubSpot's technical constraints, demonstrating strong cross-functional execution and hybrid design-engineering capabilities.</p>
                     </div>
                 </div>
             </section>
@@ -734,7 +757,7 @@
     </main>
 
     <!-- Case Study Navigation (Next / Prev) -->
-    <nav class="max-w-[1280px] mx-auto px-6 md:px-12 pb-24 md:pb-32">
+    <nav class="max-w-[1280px] mx-auto px-6 md:px-12 pb-24 md:pb-32 fade-in-section">
         <div class="border-t border-[#D8D4CC] pt-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-12">
             <a href="#" class="flex items-center gap-6 group">
                 <i data-lucide="arrow-left" class="w-6 h-6 text-[#888888] group-hover:text-[#111111] group-hover:-translate-x-2 transition-all"></i>
@@ -754,7 +777,7 @@
     </nav>
 
     <!-- Call To Action / Contact Section -->
-    <section id="contact" class="max-w-[1280px] mx-auto px-6 md:px-12 pb-24 md:pb-32">
+    <section id="contact" class="max-w-[1280px] mx-auto px-6 md:px-12 pb-24 md:pb-32 fade-in-section">
         <div class="border-t border-[#D8D4CC] pt-24 flex flex-col items-center text-center">
             <h2 class="font-instrument text-[32px] md:text-[36px] text-[#111111] mb-4">
                 Let's build meaningful product experiences together.
@@ -797,7 +820,7 @@
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
             
-            <!-- NEW: Multi-level Zoom Controls -->
+            <!-- Multi-level Zoom Controls -->
             <div class="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-1 bg-[#111111]/80 backdrop-blur-md rounded-full p-1.5 z-20 shadow-lg text-white font-plex text-[10px] md:text-[12px] tracking-[0.1em] uppercase">
                 <button id="zoomFitBtn" type="button" class="zoom-ctrl-btn px-4 py-2 bg-white/20 rounded-full transition-colors">Fit</button>
                 <button id="zoom50Btn" type="button" class="zoom-ctrl-btn px-4 py-2 hover:bg-white/20 rounded-full transition-colors">50%</button>
@@ -818,12 +841,12 @@
             <a href="https://michaelfanportfolio.github.io/homepage/" id="mobileLogoLink" class="font-instrument text-[28px] leading-none text-[#111111]">
                 Michael. Fan
             </a>
-            <button id="mobileMenuCloseBtn" type="button" class="p-2 -mr-2 text-[#111111] hover:opacity-70 transition-opacity" aria-label="Close Mobile Menu">
+            <button id="mobileMenuCloseBtn" class="p-2 -mr-2 text-[#111111] hover:opacity-70 transition-opacity" aria-label="Close Mobile Menu">
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
         </div>
         <div class="flex flex-col px-6 pt-12 pb-8 gap-8 flex-1 overflow-y-auto">
-            <button id="mobileWorkBtn" type="button" class="font-plex text-[14px] tracking-[2px] text-[#111111] uppercase flex items-center justify-between group">
+            <button id="mobileWorkBtn" class="font-plex text-[14px] tracking-[2px] text-[#111111] uppercase flex items-center justify-between group">
                 Work
                 <i data-lucide="arrow-right" class="w-4 h-4 opacity-50 group-hover:opacity-100 transition-opacity"></i>
             </button>
@@ -849,15 +872,13 @@
         // --- 0. Landing Loader Logic ---
         window.addEventListener('DOMContentLoaded', () => {
             const loader = document.getElementById('initialLoader');
-            if (loader) {
-                // Set timeout to 600ms
+            // Set timeout to exactly 400 milliseconds
+            setTimeout(() => {
+                loader.style.opacity = '0';
                 setTimeout(() => {
-                    loader.style.opacity = '0';
-                    setTimeout(() => {
-                        loader.style.display = 'none';
-                    }, 700); // Wait for the fade-out transition to complete
-                }, 600); 
-            }
+                    loader.style.display = 'none';
+                }, 700); // Wait for the fade-out transition to complete
+            }, 400); 
         });
 
         // --- 1. Megamenu Logic ---
@@ -999,18 +1020,21 @@
             });
         }
 
-        // --- 3. Lightbox Logic (Enhanced Drag-to-Pan & Multi-Zoom) ---
+        // =========================================================================
+        // 3. LIGHTBOX DRAG-TO-PAN & ZOOM LOGIC (Only need this block once per page)
+        // =========================================================================
         const lightboxModal = document.getElementById('lightboxModal');
         const lightboxImage = document.getElementById('lightboxImage');
         const lightboxContent = document.getElementById('lightboxContent');
         const lightboxClose = document.getElementById('lightboxClose');
         const lightboxScrollArea = document.getElementById('lightboxScrollArea');
+
         const zoomFitBtn = document.getElementById('zoomFitBtn');
         const zoom50Btn = document.getElementById('zoom50Btn');
         const zoom100Btn = document.getElementById('zoom100Btn');
         const zoom200Btn = document.getElementById('zoom200Btn');
 
-        let currentZoomLevel = 1; // 1 = Fit, 1.5 = 50%, 2.0 = 100%, 3.0 = 200%
+        let currentZoomLevel = 1; 
         let isPanning = false;
         let hasDragged = false;
         let startX = 0, startY = 0;
@@ -1027,29 +1051,25 @@
 
         function setZoom(scale) {
             currentZoomLevel = scale;
-            
             if (scale === 1) {
-                panX = 0;
-                panY = 0;
+                panX = 0; panY = 0;
                 lightboxImage.classList.remove('is-zoomed');
             } else {
                 lightboxImage.classList.add('is-zoomed');
-                // Enforce boundaries on current pan values with the NEW scale so image doesn't jump out of bounds when scaling down
                 const containerWidth = lightboxScrollArea.clientWidth;
                 const containerHeight = lightboxScrollArea.clientHeight;
                 const imgWidth = lightboxImage.clientWidth;
                 const imgHeight = lightboxImage.clientHeight;
-
+                
                 const scaledWidth = imgWidth * scale;
                 const scaledHeight = imgHeight * scale;
-
+                
                 const maxX = Math.max(0, (scaledWidth - containerWidth) / 2);
                 const maxY = Math.max(0, (scaledHeight - containerHeight) / 2);
-
+                
                 panX = Math.min(Math.max(panX, -maxX), maxX);
                 panY = Math.min(Math.max(panY, -maxY), maxY);
             }
-            
             lightboxImage.style.transform = `translate(${panX}px, ${panY}px) scale(${scale})`;
             updateZoomUI();
         }
@@ -1060,35 +1080,28 @@
             setZoom(1);
         }
 
-        // UI Control Listeners
         zoomFitBtn.addEventListener('click', (e) => { e.stopPropagation(); setZoom(1); });
         zoom50Btn.addEventListener('click', (e) => { e.stopPropagation(); setZoom(1.5); });
         zoom100Btn.addEventListener('click', (e) => { e.stopPropagation(); setZoom(2); });
         zoom200Btn.addEventListener('click', (e) => { e.stopPropagation(); setZoom(3); });
 
-        // Lightbox Click-to-Zoom logic (Cycles through steps)
         lightboxImage.addEventListener('click', (e) => {
             e.stopPropagation(); 
-            if (hasDragged) return; // Prevent click trigger if the user was just dragging to pan
-
+            if (hasDragged) return; 
             if (currentZoomLevel === 1) setZoom(1.5);
             else if (currentZoomLevel === 1.5) setZoom(2);
             else if (currentZoomLevel === 2) setZoom(3);
             else setZoom(1);
         });
 
-        // Drag-to-Pan Logic
         const handlePanStart = (e) => {
-            if (currentZoomLevel === 1) return; // Disable drag if not zoomed
-            e.preventDefault(); // Prevent ghost drag image natively
-            
+            if (currentZoomLevel === 1) return;
+            e.preventDefault(); 
             const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
             const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
             
-            dragStartX = clientX;
-            dragStartY = clientY;
-            startX = clientX - panX;
-            startY = clientY - panY;
+            dragStartX = clientX; dragStartY = clientY;
+            startX = clientX - panX; startY = clientY - panY;
             hasDragged = false; 
             
             document.addEventListener('mousemove', handlePanMove);
@@ -1104,33 +1117,28 @@
             const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
             const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
             
-            // Only trigger panning if moving more than a 5px threshold to distinguish from a simple click
             if (Math.abs(clientX - dragStartX) > 5 || Math.abs(clientY - dragStartY) > 5) {
                 hasDragged = true;
                 lightboxImage.classList.add('is-panning');
                 
                 let newPanX = clientX - startX;
                 let newPanY = clientY - startY;
-
-                // Boundary Calculation based on visual image rect
+                
                 const containerWidth = lightboxScrollArea.clientWidth;
                 const containerHeight = lightboxScrollArea.clientHeight;
                 const imgWidth = lightboxImage.clientWidth;
                 const imgHeight = lightboxImage.clientHeight;
-
+                
                 const scaledWidth = imgWidth * currentZoomLevel;
                 const scaledHeight = imgHeight * currentZoomLevel;
-
-                // Limit movement so the edge of the image never leaves the edge of the screen
+                
                 const maxX = Math.max(0, (scaledWidth - containerWidth) / 2);
                 const maxY = Math.max(0, (scaledHeight - containerHeight) / 2);
-
+                
                 newPanX = Math.min(Math.max(newPanX, -maxX), maxX);
                 newPanY = Math.min(Math.max(newPanY, -maxY), maxY);
-
-                panX = newPanX;
-                panY = newPanY;
-
+                
+                panX = newPanX; panY = newPanY;
                 lightboxImage.style.transform = `translate(${panX}px, ${panY}px) scale(${currentZoomLevel})`;
             }
         };
@@ -1141,11 +1149,7 @@
             document.removeEventListener('touchmove', handlePanMove);
             document.removeEventListener('touchend', handlePanEnd);
             lightboxImage.classList.remove('is-panning');
-            
-            // FIX: Reset hasDragged after a small delay so the initial 'click' event caused by releasing the mouse is ignored, but future clicks work.
-            setTimeout(() => {
-                hasDragged = false;
-            }, 50);
+            setTimeout(() => { hasDragged = false; }, 50);
         };
 
         lightboxImage.addEventListener('mousedown', handlePanStart);
@@ -1153,86 +1157,42 @@
 
         function openLightbox(imageSrc) {
             lightboxImage.src = imageSrc;
-            resetZoom(); // Start clean
-            
-            // Target specific images for full-width mobile view
-            const targetImages = [
-                'slide_1 Jetso',
-                'slide_2 Individuals',
-                'image_Solution slider card2'
-            ];
-            
-            if (targetImages.some(t => imageSrc.includes(t))) {
-                lightboxModal.classList.add('is-target-modal');
-            } else {
-                lightboxModal.classList.remove('is-target-modal');
-            }
-
+            resetZoom(); 
             lightboxModal.classList.remove('hidden');
             lightboxModal.classList.add('flex');
-            
-            // Force reflow
             void lightboxModal.offsetWidth;
-            
             lightboxModal.classList.remove('opacity-0');
             lightboxContent.classList.remove('scale-95');
 
-            // Pause all sliders if playing
-            if(typeof isPlaying !== 'undefined' && isPlaying) {
-                clearInterval(interval);
-            }
-            if(typeof isSolPlaying !== 'undefined' && isSolPlaying) {
-                clearInterval(solInterval);
-            }
-            if(typeof isStratPlaying !== 'undefined' && isStratPlaying) {
-                clearInterval(stratInterval);
-            }
-            if(typeof isIntFormPlaying !== 'undefined' && isIntFormPlaying) {
-                clearInterval(intFormInterval);
-            }
+            // Pause functionality for all sliders
+            if(typeof isPlaying !== 'undefined' && isPlaying) clearInterval(interval);
+            if(typeof isSolPlaying !== 'undefined' && isSolPlaying) clearInterval(solInterval);
         }
 
         function closeLightbox() {
             lightboxModal.classList.add('opacity-0');
             lightboxContent.classList.add('scale-95');
-            resetZoom(); // Reset state
-            
+            resetZoom();
             setTimeout(() => {
                 lightboxModal.classList.add('hidden');
                 lightboxModal.classList.remove('flex');
                 lightboxImage.src = '';
                 
-                // Resume all sliders if they were playing
-                if(typeof isPlaying !== 'undefined' && isPlaying) {
-                    startAuto();
-                }
-                if(typeof isSolPlaying !== 'undefined' && isSolPlaying) {
-                    startSolAuto();
-                }
-                if(typeof isStratPlaying !== 'undefined' && isStratPlaying) {
-                    startStratAuto();
-                }
-                if(typeof isIntFormPlaying !== 'undefined' && isIntFormPlaying) {
-                    startIntFormAuto();
-                }
+                // Resume functionality for all sliders
+                if(typeof isPlaying !== 'undefined' && isPlaying) startAuto();
+                if(typeof isSolPlaying !== 'undefined' && isSolPlaying) startSolAuto();
             }, 300);
         }
 
         lightboxClose.addEventListener('click', closeLightbox);
-        lightboxModal.addEventListener('click', (e) => {
-            if (e.target === lightboxModal || e.target === lightboxScrollArea) {
-                closeLightbox();
-            }
+        lightboxModal.addEventListener('click', (e) => { 
+            if (e.target === lightboxModal || e.target === lightboxScrollArea) closeLightbox(); 
+        });
+        document.addEventListener('keydown', (e) => { 
+            if (e.key === 'Escape' && !lightboxModal.classList.contains('hidden')) closeLightbox(); 
         });
 
-        // Close Lightbox on Escape Key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !lightboxModal.classList.contains('hidden')) {
-                closeLightbox();
-            }
-        });
-
-        // Attach zoom listeners to generic elements
+        // Attach listeners to any standalone zoomable images 
         document.querySelectorAll('.js-zoom-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -1241,17 +1201,23 @@
             });
         });
 
-        // --- CardContainer Shared Mapping Logic ---
-        function renderCardContainer(item, index, prefix, imgPaddingClass = "p-[5%]") {
+        // =========================================================================
+        // 4. SHARED CARD RENDER HELPER (Only need this block once per page)
+        // =========================================================================
+        function renderCardContainer(item, index, prefix, options = {}) {
+            const imgPaddingClass = options.imgPaddingClass || "p-4 md:p-8";
+            const iframeClass = options.iframeClass || "slide-item shrink-0 snap-center hidden md:flex w-[85vw] max-w-md md:max-w-none md:w-[400px] h-[680px] bg-[#EDF1F5] rounded-[32px] border border-[#D8D4CC]/30 items-center justify-center p-4 relative z-10 overflow-hidden";
+            const imageClass = options.imageClass || "slide-item shrink-0 snap-center flex w-[85vw] max-w-md md:max-w-none md:w-[700px] h-[280px] md:h-[680px] bg-[#F8F9FA] rounded-[32px] border border-[#D8D4CC]/30 flex-col items-center justify-center overflow-hidden relative";
+
             if (item.type === 'iframe') {
-                return `<div class="slide-item shrink-0 snap-center hidden md:flex w-[85vw] max-w-md md:max-w-none md:w-[400px] h-[680px] bg-[#EDF1F5] rounded-[32px] border border-[#D8D4CC]/30 items-center justify-center relative overflow-hidden" style="z-index: ${index + 1};">
+                return `<div class="${iframeClass}" style="z-index: ${index + 1};">
                     <iframe style="border: none; border-radius: 20px; width: 100%; height: 100%;" src="${item.src}" allowfullscreen></iframe>
                 </div>`;
             } else {
-                return `<div class="slide-item shrink-0 snap-center flex w-[85vw] max-w-md md:max-w-none md:w-[754px] h-[280px] md:h-[680px] bg-[#F8F9FA] rounded-[32px] border border-[#D8D4CC]/30 flex-col items-center justify-center overflow-hidden relative" style="z-index: ${index + 1};">
-                    <img src="${item.src}" alt="${prefix} Feature ${index}" class="w-full h-full object-contain mix-blend-multiply cursor-zoom-in ${imgPaddingClass}" onerror="this.style.display='none'" onclick="event.stopPropagation(); openLightbox('${item.src}')">
-                    <button type="button" class="absolute bottom-6 right-6 md:bottom-8 md:right-8 w-10 h-10 lg:w-12 lg:h-12 hover:scale-105 transition-transform z-10 rounded-full shadow-lg" onclick="event.stopPropagation(); openLightbox('${item.src}')">
-                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                return `<div class="${imageClass}" style="z-index: ${index + 1};">
+                    <img src="${item.src}" alt="${prefix} Statement ${index}" class="w-full h-full object-contain mix-blend-multiply cursor-zoom-in ${imgPaddingClass}" onerror="this.style.display='none'" onclick="event.stopPropagation(); openLightbox('${item.src}')">
+                    <button type="button" class="js-zoom-btn absolute bottom-6 right-6 md:bottom-8 md:right-8 w-10 h-10 lg:w-12 lg:h-12 hover:scale-105 transition-transform z-10 rounded-full shadow-lg" onclick="event.stopPropagation(); openLightbox('${item.src}')">
+                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full pointer-events-none">
                             <rect width="40" height="40" rx="20" fill="#1F2937"/>
                             <mask id="mask_${prefix}_${index}" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="8" y="8" width="24" height="24">
                                 <rect x="8" y="8" width="24" height="24" fill="#D9D9D9"/>
@@ -1265,20 +1231,22 @@
             }
         }
 
-        // --- 4. Problem Slider Logic ---
-        const problemSliderWrapper = document.getElementById('problemSlider');
-        const problemTrack = document.getElementById('problemTrack');
-        const problemDotsContainer = document.getElementById('problemDots');
-        const problemPauseBtn = document.getElementById('problemPauseBtn');
+        // --- 5. Problem Slider Logic ---
+        const problemSliderWrapper = document.getElementById('problemSliderWrapper');
+        const problemTrack = document.getElementById('problemSliderTrack');
+        const problemDotsContainer = document.getElementById('problemSliderDots');
+        const problemPauseBtn = document.getElementById('problemSliderPauseBtn');
         
         const problemSlidesData = [
-            { type: 'iframe', src: 'https://embed.figma.com/proto/osMRlGQXy4rmhL0ji6DPWi/P3-%7C-Portfolio-%7C-2024-SG-Manulife-Lead-Gen?page-id=581%3A14162&node-id=581-14412&viewport=526%2C43%2C0.38&scaling=scale-down&content-scaling=fixed&embed-host=share' },
-            { type: 'image', src: 'image_problem_slider_01-opt.webp' },
-            { type: 'image', src: 'image_problem_slider_02-opt.webp' },
-            { type: 'image', src: 'image_problem_slider_03-opt.webp' },
-            { type: 'image', src: 'image_problem_slider_04-opt.webp' },
-            { type: 'image', src: 'image_problem_slider_05-opt.webp' },
-    
+            { type: 'iframe', src: 'https://embed.figma.com/proto/YXG0FRGvgeTmndmJinBzgJ/P1-%7C-Portfolio-%7C-2024-MHG-Blog-PL-Instant?page-id=258%3A16136&node-id=258-17532&viewport=299%2C276%2C0.66&scaling=scale-down&content-scaling=fixed&embed-host=share' },
+            { type: 'image', src: 'Problem Statement_1.jpg' },
+            { type: 'image', src: 'Problem Statement_2.jpg' },
+            { type: 'image', src: 'Problem Statement_3.jpg' },
+            { type: 'image', src: 'Problem Statement_4.jpg' },
+            { type: 'image', src: 'Problem Statement_5.jpg' },
+            { type: 'image', src: 'Problem Statement_6.jpg' },
+            { type: 'image', src: 'Problem Statement_7.jpg' },
+            { type: 'image', src: 'Problem Statement_8.jpg' },
         ];
         
         let currentSlide = 0;
@@ -1288,14 +1256,17 @@
         let isPlaying = true;
         let interval;
 
-        // Generate slides dynamically using the mapped CardContainer logic
+        // Generate slides dynamically
         problemSlidesData.forEach((slideData, i) => {
             const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = renderCardContainer(slideData, i, 'prob', 'p-[10%]');
+            tempDiv.innerHTML = renderCardContainer(slideData, i, 'problem', {
+                iframeClass: "slide-item shrink-0 snap-center hidden md:flex w-[85vw] max-w-md md:max-w-none md:w-[400px] h-[680px] bg-[#EDF1F5] rounded-[32px] border border-[#D8D4CC]/30 items-center justify-center p-4 relative z-10 overflow-hidden",
+                imageClass: "slide-item shrink-0 snap-center flex w-[85vw] max-w-md md:max-w-none md:w-[700px] h-[280px] md:h-[680px] bg-[#F8F9FA] rounded-[32px] border border-[#D8D4CC]/30 flex-col items-center justify-center overflow-hidden relative",
+                imgPaddingClass: "p-4 md:p-8"
+            });
             problemTrack.appendChild(tempDiv.firstElementChild);
             
             const dot = document.createElement('button');
-            dot.type = 'button';
             const visibilityClass = slideData.type === 'iframe' ? 'hidden md:block' : 'block';
             dot.className = `${visibilityClass} relative overflow-hidden h-2 rounded-full transition-all duration-300 w-2 bg-[#111111]/20 dot-item-${i}`;
             dot.addEventListener('click', () => { 
@@ -1357,8 +1328,8 @@
 
         problemPauseBtn.addEventListener('click', () => {
             isPlaying = !isPlaying;
-            document.getElementById('pauseIcon').classList.toggle('hidden', !isPlaying);
-            document.getElementById('playIcon').classList.toggle('hidden', isPlaying);
+            document.getElementById('problemPauseIcon').classList.toggle('hidden', !isPlaying);
+            document.getElementById('problemPlayIcon').classList.toggle('hidden', isPlaying);
             
             if (isPlaying && lightboxModal.classList.contains('hidden')) {
                 startAuto();
@@ -1369,122 +1340,45 @@
             }
         });
 
-        // --- 5. Strategy Slider Logic ---
-        const strategySliderWrapper = document.getElementById('strategySlider');
-        const strategyTrack = document.getElementById('strategyTrack');
-        const strategyDotsContainer = document.getElementById('strategyDots');
-        const strategyPauseBtn = document.getElementById('strategyPauseBtn');
-        
-        const strategySlidesData = [
-            { type: 'image', src: 'image_design-strategy_slider_zoom_01-opt.webp' },
-            { type: 'image', src: 'image_design-strategy_slider_zoom_02-opt.webp' },
-            { type: 'image', src: 'image_design-strategy_slider_zoom_03-opt.webp' }
-        ];
-        
-        let currentStratSlide = 0;
-        let isStratPlaying = true;
-        let stratInterval;
-
-        // Generate slides dynamically using the mapped CardContainer logic
-        strategySlidesData.forEach((slideData, i) => {
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = renderCardContainer(slideData, i, 'strat', 'p-[5%]');
-            strategyTrack.appendChild(tempDiv.firstElementChild);
-            
-            const dot = document.createElement('button');
-            dot.type = 'button';
-            dot.className = `block relative overflow-hidden h-2 rounded-full transition-all duration-300 w-2 bg-[#111111]/20 strat-dot-item-${i}`;
-            dot.addEventListener('click', () => { 
-                clearInterval(stratInterval); 
-                currentStratSlide = i; 
-                updateStratSlider(); 
-                if (isStratPlaying) startStratAuto();
-            });
-            strategyDotsContainer.appendChild(dot);
+        // --- 6. Research Slider Logic ---
+        const resTrack = document.getElementById('resTrack');
+        document.getElementById('resPrev').addEventListener('click', () => {
+            const cardWidth = resTrack.firstElementChild.offsetWidth;
+            const gap = window.innerWidth >= 768 ? 32 : 16;
+            resTrack.scrollBy({ left: -(cardWidth + gap), behavior: 'smooth' });
+        });
+        document.getElementById('resNext').addEventListener('click', () => {
+            const cardWidth = resTrack.firstElementChild.offsetWidth;
+            const gap = window.innerWidth >= 768 ? 32 : 16;
+            resTrack.scrollBy({ left: (cardWidth + gap), behavior: 'smooth' });
         });
 
-        function updateStratSlider() {
-            const slides = strategyTrack.querySelectorAll('.slide-item');
-            const target = slides[currentStratSlide];
-            if (target && target.offsetWidth > 0) {
-                strategyTrack.scrollTo({ 
-                    left: target.offsetLeft - strategyTrack.offsetLeft - (strategyTrack.clientWidth/2) + (target.clientWidth/2), 
-                    behavior: 'smooth' 
-                });
-            }
-            
-            strategyDotsContainer.querySelectorAll('button').forEach((d, i) => {
-                if (i === currentStratSlide) {
-                    d.classList.remove('dot-active');
-                    void d.offsetWidth; 
-                    d.classList.add('dot-active');
-                } else {
-                    d.classList.remove('dot-active');
-                }
-            });
-        }
-
-        function startStratAuto() { 
-            clearInterval(stratInterval);
-            stratInterval = setInterval(() => { 
-                currentStratSlide = (currentStratSlide + 1) % strategySlidesData.length;
-                updateStratSlider(); 
-            }, 3500); 
-        }
-        
-        startStratAuto();
-        setTimeout(updateStratSlider, 100);
-
-        strategySliderWrapper.addEventListener('mouseenter', () => {
-            clearInterval(stratInterval);
-            strategySliderWrapper.classList.add('is-paused');
-        });
-        
-        strategySliderWrapper.addEventListener('mouseleave', () => { 
-            if(isStratPlaying && lightboxModal.classList.contains('hidden')) {
-                startStratAuto();
-                strategySliderWrapper.classList.remove('is-paused');
-            } 
-        });
-
-        strategyPauseBtn.addEventListener('click', () => {
-            isStratPlaying = !isStratPlaying;
-            document.getElementById('stratPauseIcon').classList.toggle('hidden', !isStratPlaying);
-            document.getElementById('stratPlayIcon').classList.toggle('hidden', isStratPlaying);
-            
-            if (isStratPlaying && lightboxModal.classList.contains('hidden')) {
-                startStratAuto();
-                strategySliderWrapper.classList.remove('is-paused');
-            } else {
-                clearInterval(stratInterval);
-                strategySliderWrapper.classList.add('is-paused');
-            }
-        });
-
-        // --- 6. Solution Slider Logic ---
-        const solutionSliderWrapper = document.getElementById('solutionSlider');
-        const solutionTrack = document.getElementById('solutionTrack');
-        const solutionDotsContainer = document.getElementById('solutionDots');
-        const solutionPauseBtn = document.getElementById('solutionPauseBtn');
+        // --- 7. Solution Slider Logic ---
+        const solutionSliderWrapper = document.getElementById('solutionSliderWrapper');
+        const solutionTrack = document.getElementById('solutionSliderTrack');
+        const solutionDotsContainer = document.getElementById('solutionSliderDots');
+        const solutionPauseBtn = document.getElementById('solutionSliderPauseBtn');
         
         const solutionSlidesData = [
-            { type: 'iframe', src: 'https://embed.figma.com/proto/osMRlGQXy4rmhL0ji6DPWi/P3-%7C-Portfolio-%7C-2024-SG-Manulife-Lead-Gen?page-id=581%3A15654&node-id=581-15655&viewport=506%2C-90%2C0.34&scaling=scale-down&content-scaling=fixed&embed-host=share', title: 'Optimizing the High-Efficiency Personal Loan Comparison & Application Journey' },
-            { type: 'image', src: 'image_solution_slide_zoom_01-opt.webp', title: 'Optimizing Information Density & CTA Hierarchy for Enhanced Product Comparison' }, 
-            { type: 'image', src: 'image_solution_slide_zoom_02-opt.webp', title: 'Streamlining the Application Flow and Enhancing User Trust' } 
+            { type: 'iframe', src: 'https://embed.figma.com/proto/YXG0FRGvgeTmndmJinBzgJ/P1-%7C-Portfolio-%7C-2024-MHG-Blog-PL-Instant?page-id=408%3A14862&node-id=408-14863&viewport=505%2C227%2C0.61&scaling=scale-down&content-scaling=fixed&embed-host=share', title: 'Optimizing the High-Efficiency Personal Loan Comparison & Application Journey' },
+            { type: 'image', src: 'image_Solution slider card2.png', title: 'Optimizing Information Density & CTA Hierarchy for Enhanced Product Comparison' }
         ];
         
         let currentSolSlide = 0;
         let isSolPlaying = true;
         let solInterval;
 
-        // Generate slides dynamically using the mapped CardContainer logic
+        // Generate slides dynamically
         solutionSlidesData.forEach((slideData, i) => {
             const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = renderCardContainer(slideData, i, 'sol', 'p-[5%]');
+            tempDiv.innerHTML = renderCardContainer(slideData, i, 'solution', {
+                iframeClass: "slide-item shrink-0 md:snap-center flex w-full md:w-[400px] h-[500px] md:h-[680px] bg-[#EDF1F5] rounded-[32px] border border-[#D8D4CC]/30 items-center justify-center p-4 relative z-10 overflow-hidden",
+                imageClass: "slide-item shrink-0 md:snap-center flex w-full md:w-[700px] h-[350px] md:h-[680px] bg-[#F8F9FA] rounded-[32px] border border-[#D8D4CC]/30 flex-col items-center justify-center overflow-hidden relative",
+                imgPaddingClass: "p-4 md:p-8"
+            });
             solutionTrack.appendChild(tempDiv.firstElementChild);
             
             const dot = document.createElement('button');
-            dot.type = 'button';
             dot.className = `relative overflow-hidden h-2 rounded-full transition-all duration-300 w-2 bg-[#111111]/20 sol-dot-item-${i}`;
             dot.addEventListener('click', () => { 
                 clearInterval(solInterval); 
@@ -1543,8 +1437,8 @@
 
         solutionPauseBtn.addEventListener('click', () => {
             isSolPlaying = !isSolPlaying;
-            document.getElementById('solPauseIcon').classList.toggle('hidden', !isSolPlaying);
-            document.getElementById('solPlayIcon').classList.toggle('hidden', isSolPlaying);
+            document.getElementById('solutionPauseIcon').classList.toggle('hidden', !isSolPlaying);
+            document.getElementById('solutionPlayIcon').classList.toggle('hidden', isSolPlaying);
             
             if (isSolPlaying && lightboxModal.classList.contains('hidden')) {
                 startSolAuto();
@@ -1555,98 +1449,21 @@
             }
         });
 
-        // --- 7. Integrated Form Slider Logic ---
-        const intFormSliderWrapper = document.getElementById('integratedFormSlider');
-        const intFormTrack = document.getElementById('integratedFormTrack');
-        const intFormDotsContainer = document.getElementById('integratedFormDots');
-        const intFormPauseBtn = document.getElementById('integratedFormPauseBtn');
-        
-        const intFormSlidesData = [
-            { type: 'image', src: 'image_solution_slide_06-opt.webp' },
-            { type: 'image', src: 'image_solution_slide_07-opt.webp' }
-        ];
-        
-        let currentIntFormSlide = 0;
-        let isIntFormPlaying = true;
-        let intFormInterval;
-
-        // Generate slides dynamically using the mapped CardContainer logic
-        intFormSlidesData.forEach((slideData, i) => {
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = renderCardContainer(slideData, i, 'intform', 'p-[5%]');
-            intFormTrack.appendChild(tempDiv.firstElementChild);
-            
-            const dot = document.createElement('button');
-            dot.type = 'button';
-            dot.className = `relative overflow-hidden h-2 rounded-full transition-all duration-300 w-2 bg-[#111111]/20 intform-dot-item-${i}`;
-            dot.addEventListener('click', () => { 
-                clearInterval(intFormInterval); 
-                currentIntFormSlide = i; 
-                updateIntFormSlider(); 
-                if (isIntFormPlaying) startIntFormAuto();
-            });
-            intFormDotsContainer.appendChild(dot);
-        });
-
-        function updateIntFormSlider() {
-            if (window.innerWidth < 768) return; // Disable slider scrolling on mobile to match Solution section
-            const slides = intFormTrack.querySelectorAll('.slide-item');
-            const target = slides[currentIntFormSlide];
-            if (target && target.offsetWidth > 0) {
-                intFormTrack.scrollTo({ 
-                    left: target.offsetLeft - intFormTrack.offsetLeft - (intFormTrack.clientWidth/2) + (target.clientWidth/2), 
-                    behavior: 'smooth' 
-                });
-            }
-            
-            intFormDotsContainer.querySelectorAll('button').forEach((d, i) => {
-                if (i === currentIntFormSlide) {
-                    d.classList.remove('dot-active');
-                    void d.offsetWidth; 
-                    d.classList.add('dot-active');
-                } else {
-                    d.classList.remove('dot-active');
+        // --- Scroll Fading Observer ---
+        const fadeElements = document.querySelectorAll('.fade-in-section');
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
                 }
             });
-        }
-
-        function startIntFormAuto() { 
-            clearInterval(intFormInterval);
-            if (window.innerWidth < 768) return; // Disable autoplay on mobile
-            intFormInterval = setInterval(() => { 
-                currentIntFormSlide = (currentIntFormSlide + 1) % intFormSlidesData.length;
-                updateIntFormSlider(); 
-            }, 3500); 
-        }
-        
-        startIntFormAuto();
-        setTimeout(updateIntFormSlider, 100);
-
-        intFormSliderWrapper.addEventListener('mouseenter', () => {
-            clearInterval(intFormInterval);
-            intFormSliderWrapper.classList.add('is-paused');
+        }, {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
         });
         
-        intFormSliderWrapper.addEventListener('mouseleave', () => { 
-            if(isIntFormPlaying && lightboxModal.classList.contains('hidden')) {
-                startIntFormAuto();
-                intFormSliderWrapper.classList.remove('is-paused');
-            } 
-        });
-
-        intFormPauseBtn.addEventListener('click', () => {
-            isIntFormPlaying = !isIntFormPlaying;
-            document.getElementById('intFormPauseIcon').classList.toggle('hidden', !isIntFormPlaying);
-            document.getElementById('intFormPlayIcon').classList.toggle('hidden', isIntFormPlaying);
-            
-            if (isIntFormPlaying && lightboxModal.classList.contains('hidden')) {
-                startIntFormAuto();
-                intFormSliderWrapper.classList.remove('is-paused');
-            } else {
-                clearInterval(intFormInterval);
-                intFormSliderWrapper.classList.add('is-paused');
-            }
-        });
+        fadeElements.forEach(el => fadeObserver.observe(el));
 
     </script>
 </body>
